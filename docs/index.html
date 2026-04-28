@@ -1,9 +1,198 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Beginner-friendly comparison of LangGraph, CrewAI, and Microsoft AutoGen agent frameworks."><title>AI Agent Frameworks Beginner Infographic</title>
-<style>body{font-family:Arial,sans-serif;background:#F5F0E8;color:#2D2D2D;margin:30px;}@media(max-width:700px){body{margin:14px}td,th{font-size:13px;padding:7px}h1{font-size:28px}}.wrap{max-width:1220px;margin:auto}img{width:100%;border:3px solid #2D2D2D;border-radius:18px;background:white}a{color:#B2463E;font-weight:bold}table{border-collapse:collapse;width:100%;background:#fff8;margin-top:16px}td,th{border:1px solid #999;padding:10px;text-align:left;vertical-align:top}th{background:#FFD5C2}code{background:#fff;padding:2px 4px}</style></head>
-<body><div class="wrap"><h1>Top AI Agent Frameworks: Beginner Map</h1>
-<p>Download files: <a download href="infographic.png">PNG infographic</a> · <a download href="infographic.svg">SVG infographic</a> · <a download href="report.md">Markdown report</a> · <a download href="comparison.csv">CSV table</a></p>
-<img src="infographic.png" alt="Beginner-friendly AI agent framework comparison infographic">
-<h2>Comparison Table</h2><table><thead><tr><th>Framework</th><th>Latest stable version</th><th>Simple analogy</th><th>What is new</th><th>Strength 1</th><th>Strength 2</th><th>Beginner takeaway</th></tr></thead><tbody><tr><td>LangGraph</td><td>1.1.9</td><td>Train track for AI workflows</td><td>Fixes resume behavior for subgraphs; improves observability/debugging compatibility.</td><td>Durable execution for long-running agents</td><td>Human-in-the-loop checkpoints</td><td>Best when you need control, reliability, and pause/resume.</td></tr>
-<tr><td>CrewAI</td><td>1.14.3</td><td>Small project team of AI workers</td><td>Adds checkpoint lifecycle events, E2B/Daytona sandbox tools, Bedrock V4, checkpoint/fork support, and about 29% faster startup.</td><td>Easy role-based crew model</td><td>Production workflow features like Flows, checkpoints, resume/fork, CLI, deploy validation</td><td>Easiest to picture: give agents jobs, like teammates.</td></tr>
-<tr><td>Microsoft AutoGen</td><td>0.7.5</td><td>Conference room for AI agents</td><td>Fixes for streaming, Redis memory/cache, Anthropic thinking mode, OpenAI GPT-5 reasoning_effort, MCP, GraphFlow, Docker warnings.</td><td>AgentChat high-level API</td><td>autogen-core path to larger event-driven systems</td><td>Useful, but Microsoft says AutoGen is in maintenance mode.</td></tr></tbody></table>
-<p>Checked: 2026-04-26 UTC. Sources are listed in <code>report.md</code>.</p></div></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Beginner-friendly comparison and visual guide for LangGraph, CrewAI, and Microsoft AutoGen agent frameworks.">
+  <title>Top AI Agent Frameworks: Beginner Map</title>
+  <style>
+    :root{
+      --ink:#2D2D2D;
+      --paper:#F5F0E8;
+      --card:#FFFDF7;
+      --cream:#FFF6DF;
+      --peach:#FFD5C2;
+      --rose:#B2463E;
+      --blue:#83B6D9;
+      --yellow:#F4C95D;
+      --purple:#B7A1E5;
+      --green:#93C9A2;
+      --line:#2D2D2D;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Arial, Helvetica, sans-serif;background:var(--paper);color:var(--ink);margin:0;line-height:1.55;}
+    .wrap{max-width:1180px;margin:auto;padding:30px 22px 56px;}
+    .hero{background:linear-gradient(135deg,#FFFDF7,#FFF2D8);border:3px solid var(--line);border-radius:28px;padding:34px 28px;box-shadow:8px 8px 0 rgba(45,45,45,.12);}
+    h1{font-size:clamp(34px,5vw,62px);line-height:1.02;margin:0 0 14px;letter-spacing:-1.5px;}
+    h2{font-size:clamp(26px,3.4vw,40px);margin:42px 0 14px;}
+    h3{font-size:22px;margin:0 0 8px;}
+    p{font-size:17px;margin:10px 0;}
+    a{color:var(--rose);font-weight:bold;}
+    code{background:#fff;padding:2px 5px;border-radius:5px;}
+    .lede{font-size:20px;max-width:850px;}
+    .pillrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+    .pill{border:2px solid var(--line);border-radius:999px;background:white;padding:8px 13px;font-weight:700;}
+    .downloads{margin-top:18px;padding:12px 14px;background:#fff;border:2px dashed var(--line);border-radius:14px;}
+    .section-note{max-width:900px;font-size:18px;}
+    .first-version{background:var(--card);border:3px solid var(--line);border-radius:24px;padding:22px;margin-top:20px;}
+    img.infographic{width:100%;border:3px solid var(--line);border-radius:18px;background:white;display:block;margin:18px 0;}
+    table{border-collapse:collapse;width:100%;background:rgba(255,255,255,.72);margin-top:16px;border:2px solid var(--line);}
+    td,th{border:1px solid #8a8279;padding:11px;text-align:left;vertical-align:top;font-size:15px;}
+    th{background:var(--peach);font-size:15px;}
+    .table-wrap{overflow-x:auto;border-radius:14px;}
+    .visual-guide{margin-top:36px;}
+    .map-card,.choice-card,.framework-card{background:var(--card);border:3px solid var(--line);border-radius:24px;padding:22px;box-shadow:6px 6px 0 rgba(45,45,45,.10);}
+    .map-card{margin-top:18px;}
+    .question-box{text-align:center;font-weight:800;font-size:24px;border:3px solid var(--line);border-radius:18px;background:white;padding:18px;margin:0 auto 22px;max-width:560px;}
+    .branches{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch;}
+    .branch{border:3px solid var(--line);border-radius:20px;background:white;padding:18px;text-align:center;position:relative;}
+    .branch:before{content:"↓";display:block;font-size:28px;font-weight:bold;margin-bottom:5px;}
+    .branch strong{display:block;font-size:22px;margin:8px 0 4px;}
+    .branch.lang{background:#EAF6FF}.branch.crew{background:#FFF2C5}.branch.auto{background:#F0EAFE}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px;}
+    .framework-card{display:flex;flex-direction:column;gap:12px;min-height:100%;}
+    .framework-card .tag{display:inline-block;border:2px solid var(--line);border-radius:999px;padding:5px 10px;background:white;font-weight:800;width:max-content;}
+    .lang-card{background:#EAF6FF}.crew-card{background:#FFF2C5}.auto-card{background:#F0EAFE}
+    .diagram{background:white;border:2px solid var(--line);border-radius:18px;min-height:210px;padding:16px;display:flex;align-items:center;justify-content:center;}
+    .track{width:100%;}
+    .track-line{height:8px;background:repeating-linear-gradient(90deg,var(--line) 0 18px,transparent 18px 26px);border-radius:8px;margin:30px 0;position:relative;}
+    .train{display:inline-block;background:var(--blue);border:3px solid var(--line);border-radius:13px;padding:10px 18px;font-weight:800;box-shadow:4px 4px 0 rgba(45,45,45,.12);}
+    .stations{display:flex;justify-content:space-between;font-size:13px;font-weight:700;}
+    .team{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;width:100%;text-align:center;}
+    .manager{grid-column:1/4;justify-self:center;background:var(--yellow);border:3px solid var(--line);border-radius:14px;padding:10px 20px;font-weight:800;}
+    .worker{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 8px;font-size:14px;font-weight:800;}
+    .room{width:100%;border:3px solid var(--line);border-radius:22px;padding:16px;background:#FBF8FF;text-align:center;}
+    .bubbles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;}
+    .bubble{background:white;border:2px solid var(--line);border-radius:18px;padding:12px;font-weight:800;}
+    .warn{background:#FFE3E0;border:2px solid var(--rose);border-radius:12px;padding:8px 10px;color:#7D2822;font-weight:800;margin-top:10px;}
+    ul{padding-left:20px;margin:8px 0;}
+    li{margin:5px 0;}
+    .choice-card{margin-top:22px;background:#FFFDF7;}
+    .choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;}
+    .choice{border:3px solid var(--line);border-radius:18px;background:white;padding:18px;}
+    .choice .num{display:inline-grid;place-items:center;width:34px;height:34px;border:2px solid var(--line);border-radius:50%;font-weight:900;margin-bottom:8px;}
+    .takeaway{background:#EAF7ED;border:3px solid var(--line);border-radius:22px;padding:20px;margin-top:24px;}
+    .footer{margin-top:30px;font-size:14px;color:#5c5650;}
+    @media(max-width:850px){.branches,.cards,.choice-grid{grid-template-columns:1fr}.wrap{padding:18px 14px 42px}.hero{padding:24px 18px}td,th{font-size:13px;padding:8px}.diagram{min-height:180px}.team{grid-template-columns:1fr}.manager{grid-column:1}.bubbles{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Top AI Agent Frameworks: Beginner Map</h1>
+      <p class="lede">A beginner-friendly comparison of <strong>LangGraph</strong>, <strong>CrewAI</strong>, and <strong>Microsoft AutoGen</strong> — first as the original concise map, then as a visual guide using simple analogies.</p>
+      <div class="pillrow">
+        <span class="pill">Original Version Preserved</span>
+        <span class="pill">New Visual Guide Added</span>
+        <span class="pill">Checked: 2026-04-26 UTC</span>
+      </div>
+      <p class="downloads">Download files: <a download href="infographic.png">PNG infographic</a> · <a download href="infographic.svg">SVG infographic</a> · <a download href="report.md">Markdown report</a> · <a download href="comparison.csv">CSV table</a></p>
+    </section>
+
+    <section class="first-version" id="original-map">
+      <h2>Version 1: Original Beginner Map</h2>
+      <p class="section-note">This is the first version: compact, table-based, and useful when you want the facts quickly. It keeps the original comparison and version notes intact.</p>
+      <img class="infographic" src="infographic.png" alt="Beginner-friendly AI agent framework comparison infographic">
+      <h3>Comparison Table</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Framework</th><th>Latest stable version</th><th>Simple analogy</th><th>What is new</th><th>Strength 1</th><th>Strength 2</th><th>Beginner takeaway</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>LangGraph</strong></td><td>1.1.9</td><td>Train track for AI workflows</td><td>Fixes resume behavior for subgraphs; improves observability/debugging compatibility.</td><td>Durable execution for long-running agents</td><td>Human-in-the-loop checkpoints</td><td>Best when you need control, reliability, and pause/resume.</td></tr>
+            <tr><td><strong>CrewAI</strong></td><td>1.14.3</td><td>Small project team of AI workers</td><td>Adds checkpoint lifecycle events, E2B/Daytona sandbox tools, Bedrock V4, checkpoint/fork support, and about 29% faster startup.</td><td>Easy role-based crew model</td><td>Production workflow features like Flows, checkpoints, resume/fork, CLI, deploy validation</td><td>Easiest to picture: give agents jobs, like teammates.</td></tr>
+            <tr><td><strong>Microsoft AutoGen</strong></td><td>0.7.5</td><td>Conference room for AI agents</td><td>Fixes for streaming, Redis memory/cache, Anthropic thinking mode, OpenAI GPT-5 reasoning_effort, MCP, GraphFlow, Docker warnings.</td><td>AgentChat high-level API</td><td>autogen-core path to larger event-driven systems</td><td>Useful, but Microsoft says AutoGen is in maintenance mode.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="visual-guide" id="visual-guide">
+      <h2>Version 2: Visual Beginner Guide</h2>
+      <p class="section-note">The visual version keeps the same conclusions, but adds a mental picture for each framework. It is still short, but gives beginners enough context to feel they learned something practical.</p>
+
+      <div class="map-card">
+        <div class="question-box">You want to build an AI agent. What does the work feel like?</div>
+        <div class="branches">
+          <div class="branch lang"><strong>Workflow Track</strong><span>LangGraph</span><p>For controlled, stateful, pause-and-resume workflows.</p></div>
+          <div class="branch crew"><strong>Project Team</strong><span>CrewAI</span><p>For role-based collaboration between specialized agents.</p></div>
+          <div class="branch auto"><strong>Meeting Room</strong><span>AutoGen</span><p>For multi-agent conversation and collaboration experiments.</p></div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <article class="framework-card lang-card">
+          <span class="tag">LangGraph</span>
+          <div class="diagram" aria-label="LangGraph train track diagram">
+            <div class="track">
+              <span class="train">Agent Train</span>
+              <div class="track-line"></div>
+              <div class="stations"><span>Step A</span><span>Checkpoint</span><span>Resume</span></div>
+            </div>
+          </div>
+          <h3>Like a train track for AI workflows</h3>
+          <p>LangGraph is best understood as a controlled path. The agent moves through steps, remembers state, can pause for a human checkpoint, and can continue later.</p>
+          <ul>
+            <li><strong>Use it when:</strong> reliability and control matter.</li>
+            <li><strong>Beginner value:</strong> it teaches agents as workflows, not magic.</li>
+            <li><strong>Watch for:</strong> it may feel more technical than CrewAI at first.</li>
+          </ul>
+        </article>
+
+        <article class="framework-card crew-card">
+          <span class="tag">CrewAI</span>
+          <div class="diagram" aria-label="CrewAI project team diagram">
+            <div class="team">
+              <div class="manager">Manager</div>
+              <div class="worker">Researcher<br><small>finds info</small></div>
+              <div class="worker">Writer<br><small>drafts</small></div>
+              <div class="worker">Reviewer<br><small>checks</small></div>
+            </div>
+          </div>
+          <h3>Like a small project team</h3>
+          <p>CrewAI is easy to picture because each agent can have a role, goal, and toolset. Beginners can start by asking: “Who should do which part of the work?”</p>
+          <ul>
+            <li><strong>Use it when:</strong> tasks naturally split into roles.</li>
+            <li><strong>Beginner value:</strong> the teammate model is intuitive.</li>
+            <li><strong>Extra depth:</strong> Flows and checkpoints support more serious workflows.</li>
+          </ul>
+        </article>
+
+        <article class="framework-card auto-card">
+          <span class="tag">Microsoft AutoGen</span>
+          <div class="diagram" aria-label="AutoGen meeting room diagram">
+            <div class="room">
+              <strong>AI Meeting Room</strong>
+              <div class="bubbles"><div class="bubble">Agent A</div><div class="bubble">Agent B</div><div class="bubble">User</div><div class="bubble">Agent C</div></div>
+              <div class="warn">Note: maintenance mode</div>
+            </div>
+          </div>
+          <h3>Like a conference room for agents</h3>
+          <p>AutoGen helps beginners understand agents that talk to each other, form teams, and coordinate through conversation. It is useful conceptually, but the maintenance-mode note matters.</p>
+          <ul>
+            <li><strong>Use it when:</strong> you want to study multi-agent dialogue.</li>
+            <li><strong>Beginner value:</strong> AgentChat makes agent conversation concrete.</li>
+            <li><strong>Watch for:</strong> Microsoft recommends new users look at Microsoft Agent Framework.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="choice-card">
+        <h2>Which should a beginner try first?</h2>
+        <div class="choice-grid">
+          <div class="choice"><span class="num">1</span><h3>Need stable steps?</h3><p>Choose <strong>LangGraph</strong> if your agent needs a clear process, memory, checkpoints, and recovery.</p></div>
+          <div class="choice"><span class="num">2</span><h3>Need role teamwork?</h3><p>Choose <strong>CrewAI</strong> if the task feels like a small team with a researcher, writer, reviewer, or manager.</p></div>
+          <div class="choice"><span class="num">3</span><h3>Need agent conversations?</h3><p>Study <strong>AutoGen</strong> if you want to understand multi-agent discussion, while remembering its maintenance-mode caveat.</p></div>
+        </div>
+        <div class="takeaway">
+          <h3>One-sentence takeaway</h3>
+          <p><strong>CrewAI</strong> is usually the easiest mental model, <strong>LangGraph</strong> is strongest for reliable workflows, and <strong>AutoGen</strong> is useful for understanding agent conversations but should be approached with its maintenance status in mind.</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer">Sources and detailed notes are listed in <code>report.md</code>. This page intentionally shows both the original concise version and the added visual explanation version.</p>
+  </main>
+</body>
+</html>
